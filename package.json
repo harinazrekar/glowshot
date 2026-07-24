@@ -4,10 +4,10 @@
   "private": true,
   "description": "Turn screenshots and code into gorgeous, shareable images. Free, open-source, 100% client-side. An alternative to ray.so and carbon.",
   "license": "MIT",
-  "homepage": "https://glowshot.app",
+  "homepage": "https://glowshot-sigma.vercel.app",
   "repository": {
     "type": "git",
-    "url": "https://github.com/your-username/glowshot.git"
+    "url": "https://github.com/harinazrekar/glowshot.git"
   },
   "keywords": [
     "screenshot",

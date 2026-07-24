@@ -8,12 +8,12 @@
 
 Free · open source · runs 100% in your browser · no signup, no upload, no tracking.
 
-[![Stars](https://img.shields.io/github/stars/your-username/glowshot?style=for-the-badge&color=7c5cff&labelColor=0a0a0f)](https://github.com/your-username/glowshot/stargazers)
+[![Stars](https://img.shields.io/github/stars/harinazrekar/glowshot?style=for-the-badge&color=7c5cff&labelColor=0a0a0f)](https://github.com/harinazrekar/glowshot/stargazers)
 [![License: MIT](https://img.shields.io/badge/License-MIT-a960ee?style=for-the-badge&labelColor=0a0a0f)](./LICENSE)
 [![Next.js](https://img.shields.io/badge/Next.js-16-000?style=for-the-badge&logo=next.js&labelColor=0a0a0f)](https://nextjs.org)
 [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-28c840?style=for-the-badge&labelColor=0a0a0f)](./CONTRIBUTING.md)
 
-[**🚀 Live demo**](https://glowshot.app) · [Report bug](https://github.com/your-username/glowshot/issues) · [Request feature](https://github.com/your-username/glowshot/issues)
+[**🚀 Live demo**](https://glowshot-sigma.vercel.app) · [Report bug](https://github.com/harinazrekar/glowshot/issues) · [Request feature](https://github.com/harinazrekar/glowshot/issues)
 
 </div>
 
@@ -46,7 +46,7 @@ It's a free, open-source alternative to tools like **ray.so**, **carbon**, and *
 ## 🚀 Quick start
 
 ```bash
-git clone https://github.com/your-username/glowshot.git
+git clone https://github.com/harinazrekar/glowshot.git
 cd glowshot
 npm install
 npm run dev
@@ -65,7 +65,7 @@ npm start       # serve it
 
 Deploy to Vercel, Netlify, or Cloudflare Pages with zero config:
 
-[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https://github.com/your-username/glowshot)
+[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https://github.com/harinazrekar/glowshot)
 
 ## 🛠️ Tech stack
 
@@ -95,7 +95,7 @@ No database. No API. No server-side rendering of your content. Just a fast, pret
 - [ ] Shareable preset links
 - [ ] Browser extension (screenshot → beautify in one click)
 
-Have an idea? [Open an issue](https://github.com/your-username/glowshot/issues) — this project is built in the open.
+Have an idea? [Open an issue](https://github.com/harinazrekar/glowshot/issues) — this project is built in the open.
 
 ## 🤝 Contributing
 
@@ -111,7 +111,7 @@ If Glowshot saved you time, the best thank-you is a **⭐ star** — it genuinel
 
 <div align="center">
 
-Built with 💜 by <a href="https://deviaisolutions.vercel.app">Devia Solutions</a> · <a href="https://glowshot.app">glowshot.app</a>
+Built with 💜 by <a href="https://deviaisolutions.vercel.app">Devia Solutions</a> · <a href="https://glowshot-sigma.vercel.app">glowshot-sigma.vercel.app</a>
 
 <sub>If you build products this polished, <a href="https://deviaisolutions.vercel.app">let's talk</a>.</sub>
 

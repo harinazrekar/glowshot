@@ -5,7 +5,7 @@ Thanks for being here! 💜 Glowshot is built in the open and every contribution
 ## Ways to help
 
 - ⭐ **Star the repo** — the single easiest way to help it grow.
-- 🐛 **Report bugs** — [open an issue](https://github.com/your-username/glowshot/issues) with steps to reproduce.
+- 🐛 **Report bugs** — [open an issue](https://github.com/harinazrekar/glowshot/issues) with steps to reproduce.
 - 💡 **Suggest features** — got an idea? We'd love to hear it.
 - 🎨 **Add presets** — new gradients, mesh backgrounds, or shadow styles are a great first contribution (see `src/lib/presets.ts`).
 - 🧑‍💻 **Fix or build** — grab anything from the [roadmap](./README.md#-roadmap).
@@ -13,7 +13,7 @@ Thanks for being here! 💜 Glowshot is built in the open and every contribution
 ## Development setup
 
 ```bash
-git clone https://github.com/your-username/glowshot.git
+git clone https://github.com/harinazrekar/glowshot.git
 cd glowshot
 npm install
 npm run dev
