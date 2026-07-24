@@ -26,6 +26,11 @@
     "lint": "eslint",
     "test": "node --disable-warning=MODULE_TYPELESS_PACKAGE_JSON --import ./test/register.mjs --test"
   },
+  "comment:overrides": "Force patched transitive deps (see KNOWN_ISSUES.md). Even latest Next bundles vulnerable postcss/sharp; no forward bump exists. This app uses a plain <img>, not next/image, so sharp is never invoked.",
+  "overrides": {
+    "postcss": "^8.5.22",
+    "sharp": "^0.35.3"
+  },
   "dependencies": {
     "html-to-image": "^1.11.13",
     "lucide-react": "^1.26.0",

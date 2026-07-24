@@ -7,6 +7,16 @@ interface ExportOpts {
   format?: ExportFormat;
 }
 
+/**
+ * Editor-only chrome (selection handles, outlines) lives inside the export
+ * node so it can be positioned in annotation coordinate space. Tag it with
+ * this class and drop it at capture time so it never bakes into the image.
+ */
+const EXCLUDE_CLASS = "glow-no-export";
+function keepInExport(node: HTMLElement): boolean {
+  return !(node.classList && node.classList.contains(EXCLUDE_CLASS));
+}
+
 async function renderBlob(node: HTMLElement, opts: ExportOpts): Promise<Blob> {
   // Render twice: the first pass warms font/image embedding so the second
   // pass is pixel-accurate (a known html-to-image quirk).
@@ -14,6 +24,7 @@ async function renderBlob(node: HTMLElement, opts: ExportOpts): Promise<Blob> {
   const options = {
     pixelRatio: opts.scale,
     cacheBust: true,
+    filter: keepInExport,
     style: { margin: "0" },
     type: jpeg ? "image/jpeg" : "image/png",
     quality: jpeg ? 0.95 : 1,
@@ -53,7 +64,7 @@ export async function copyImage(node: HTMLElement, opts: ExportOpts) {
 /** Download a scalable SVG (DOM wrapped in a foreignObject). */
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 export async function downloadSvg(node: HTMLElement, _opts?: ExportOpts) {
-  const options = { cacheBust: true, style: { margin: "0" } };
+  const options = { cacheBust: true, filter: keepInExport, style: { margin: "0" } };
   // Two passes so fonts/images are embedded before the final capture.
   await toSvg(node, options);
   const dataUrl = await toSvg(node, options);
@@ -73,6 +84,7 @@ export async function copyDataUri(node: HTMLElement, opts: ExportOpts) {
   const options = {
     pixelRatio: opts.scale,
     cacheBust: true,
+    filter: keepInExport,
     style: { margin: "0" },
   };
   await toPng(node, options);

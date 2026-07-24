@@ -337,7 +337,7 @@ function TextSelectionOutline({
 
   if (!box) return null;
   return (
-    <svg style={{ position: "absolute", inset: 0, width: "100%", height: "100%", overflow: "visible" }}>
+    <svg className="glow-no-export" style={{ position: "absolute", inset: 0, width: "100%", height: "100%", overflow: "visible" }}>
       <rect
         x={selected.x}
         y={selected.y}
@@ -427,7 +427,7 @@ function SelectionHandles({
       { x: selected.x + selected.w, y: selected.y + selected.h, end: "tip" },
     ];
     return (
-      <svg style={svgStyle}>
+      <svg className="glow-no-export" style={svgStyle}>
         {pts.map((pt) => (
           <rect key={pt.end} x={pt.x - handleSize / 2} y={pt.y - handleSize / 2} width={handleSize} height={handleSize}
             fill="#fff" stroke="var(--color-accent)" strokeWidth={1.5 / fitScale} rx={2 / fitScale}
@@ -441,7 +441,7 @@ function SelectionHandles({
   if (selected.type === "step") {
     const d = stepDiameter(selected);
     return (
-      <svg style={svgStyle}>
+      <svg className="glow-no-export" style={svgStyle}>
         <circle cx={selected.x} cy={selected.y} r={d / 2 + 4 / fitScale} fill="none"
           stroke="var(--color-accent)" strokeWidth={1.5 / fitScale} strokeDasharray={`${4 / fitScale} ${3 / fitScale}`} />
       </svg>
@@ -458,7 +458,7 @@ function SelectionHandles({
   // Freehand pen: show the bounding box but no corner handles (move-only).
   if (selected.type === "pen") {
     return (
-      <svg style={svgStyle}>
+      <svg className="glow-no-export" style={svgStyle}>
         <rect x={b.left} y={b.top} width={b.width} height={b.height} fill="none"
           stroke="var(--color-accent)" strokeWidth={1 / fitScale} strokeDasharray={`${4 / fitScale} ${3 / fitScale}`} />
       </svg>
