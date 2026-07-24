@@ -13,7 +13,6 @@ import {
   decodeShare,
   encodeShare,
   readShareToken,
-  resolveBackground,
   SHARE_KEYS,
 } from "@/lib/share";
 import { Canvas } from "./Canvas";
@@ -29,6 +28,9 @@ export function Editor() {
   const stageRef = useRef<HTMLDivElement>(null);
   const fileInputRef = useRef<HTMLInputElement>(null);
   const rasterRefreshRef = useRef<null | (() => Promise<void>)>(null);
+  // Timestamp of the last arrow-key nudge, so a burst of presses (incl. key
+  // auto-repeat) collapses into a single undo step instead of one per key.
+  const lastNudgeRef = useRef(0);
 
   const [busy, setBusy] = useState(false);
   const [copied, setCopied] = useState(false);
@@ -50,6 +52,8 @@ export function Editor() {
   }, []);
 
   // Hydrate from a shared link (#s=…) on first load, then tidy the URL.
+  // `decodeShare` returns fully validated/clamped state (see sanitizeShared),
+  // so every value here is safe to apply directly.
   useEffect(() => {
     const token = readShareToken();
     if (!token) return;
@@ -57,14 +61,7 @@ export function Editor() {
     if (shared) {
       const st = useEditor.getState();
       for (const k of SHARE_KEYS) {
-        if (!(k in shared)) continue;
-        if (k === "background") {
-          const bg = resolveBackground(shared.background);
-          if (bg) st.set("background", bg);
-        } else {
-          // eslint-disable-next-line @typescript-eslint/no-explicit-any
-          st.set(k as any, (shared as any)[k]);
-        }
+        if (k in shared) st.set(k as keyof typeof st, shared[k] as never);
       }
     }
     history.replaceState(null, "", window.location.pathname + window.location.search);
@@ -228,7 +225,11 @@ export function Editor() {
         const step = e.shiftKey ? 10 : 1;
         const dx = e.key === "ArrowLeft" ? -step : e.key === "ArrowRight" ? step : 0;
         const dy = e.key === "ArrowUp" ? -step : e.key === "ArrowDown" ? step : 0;
-        st.beginHistory();
+        // Snapshot only when starting a fresh nudge (>400ms since the last one),
+        // so holding/tapping arrows is one undo step, not dozens.
+        const now = Date.now();
+        if (now - lastNudgeRef.current > 400) st.beginHistory();
+        lastNudgeRef.current = now;
         st.nudgeAnnotation(st.selectedId, dx, dy);
       } else if (!typing && (e.key === "Delete" || e.key === "Backspace")) {
         if (st.selectedId) {

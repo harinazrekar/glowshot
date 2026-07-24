@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useLayoutEffect, useRef, useState } from "react";
 import { useEditor } from "@/lib/store";
 import { uid } from "@/lib/util";
 import type { Annotation, Point } from "@/lib/types";
@@ -290,6 +290,7 @@ export function AnnotationLayer({ fitScale, baseRaster, rasterScale }: Props) {
       {s.annotations.filter((a) => a.type === "text").map((a) => (
         <div
           key={a.id}
+          data-ann-text={a.id}
           onPointerDown={(e) => startMove(e, a)}
           onDoubleClick={() => { s.set("tool", "select"); setEditingId(a.id); }}
           contentEditable={editingId === a.id}
@@ -314,6 +315,41 @@ export function AnnotationLayer({ fitScale, baseRaster, rasterScale }: Props) {
         <SelectionHandles selected={selected} fitScale={fitScale} onResize={startResize} onLineEnd={startLineEnd} />
       )}
     </div>
+  );
+}
+
+/** Move-only dashed outline for a selected text label, sized to its DOM box. */
+function TextSelectionOutline({
+  selected,
+  fitScale,
+}: {
+  selected: Annotation;
+  fitScale: number;
+}) {
+  const [box, setBox] = useState<{ w: number; h: number } | null>(null);
+
+  useLayoutEffect(() => {
+    // Measuring the rendered text node is exactly what a layout effect is for.
+    const el = document.querySelector<HTMLElement>(`[data-ann-text="${selected.id}"]`);
+    // eslint-disable-next-line react-hooks/set-state-in-effect
+    if (el) setBox({ w: el.offsetWidth, h: el.offsetHeight });
+  }, [selected.id, selected.text, selected.fontSize, selected.bg]);
+
+  if (!box) return null;
+  return (
+    <svg style={{ position: "absolute", inset: 0, width: "100%", height: "100%", overflow: "visible" }}>
+      <rect
+        x={selected.x}
+        y={selected.y}
+        width={box.w}
+        height={box.h}
+        rx={selected.bg ? 8 : 4}
+        fill="none"
+        stroke="var(--color-accent)"
+        strokeWidth={1 / fitScale}
+        strokeDasharray={`${4 / fitScale} ${3 / fitScale}`}
+      />
+    </svg>
   );
 }
 
@@ -410,6 +446,12 @@ function SelectionHandles({
           stroke="var(--color-accent)" strokeWidth={1.5 / fitScale} strokeDasharray={`${4 / fitScale} ${3 / fitScale}`} />
       </svg>
     );
+  }
+
+  // Text: no corner handles (font-size, not a box, controls its size) — just a
+  // dashed outline measured from the rendered node so it hugs the actual text.
+  if (selected.type === "text") {
+    return <TextSelectionOutline selected={selected} fitScale={fitScale} />;
   }
 
   const b = bounds(selected);

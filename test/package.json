@@ -1,0 +1,4 @@
+{
+  "//": "Scopes the test files to ESM so Node doesn't reparse-and-warn. Kept out of the root package.json to avoid changing how Next loads its config.",
+  "type": "module"
+}
