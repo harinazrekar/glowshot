@@ -1,0 +1,182 @@
+@import "tailwindcss";
+
+@theme inline {
+  --font-sans: var(--font-sans);
+  --font-mono: var(--font-mono);
+
+  --color-bg: #0a0a0f;
+  --color-panel: #121218;
+  --color-panel-2: #1a1a22;
+  --color-border: #26262f;
+  --color-border-hover: #3a3a46;
+  --color-fg: #ededf2;
+  --color-muted: #9a9aa8;
+  --color-accent: #7c5cff;
+  --color-accent-2: #a960ee;
+}
+
+html,
+body {
+  height: 100%;
+}
+
+body {
+  background: var(--color-bg);
+  color: var(--color-fg);
+  font-family: var(--font-sans), system-ui, sans-serif;
+}
+
+/* Subtle ambient glow behind the app */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  background:
+    radial-gradient(60% 50% at 20% 0%, rgba(124, 92, 255, 0.12), transparent 70%),
+    radial-gradient(50% 50% at 100% 20%, rgba(169, 96, 238, 0.1), transparent 70%);
+  pointer-events: none;
+}
+
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: var(--color-border);
+  border-radius: 999px;
+  border: 2px solid var(--color-bg);
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--color-border-hover);
+}
+
+/* Checkerboard used to indicate transparency */
+.checkerboard {
+  background-color: #2a2a33;
+  background-image:
+    linear-gradient(45deg, #1e1e26 25%, transparent 25%),
+    linear-gradient(-45deg, #1e1e26 25%, transparent 25%),
+    linear-gradient(45deg, transparent 75%, #1e1e26 75%),
+    linear-gradient(-45deg, transparent 75%, #1e1e26 75%);
+  background-size: 20px 20px;
+  background-position: 0 0, 0 10px, 10px -10px, -10px 0px;
+}
+
+/* Range slider styling */
+input[type="range"] {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 100%;
+  height: 4px;
+  border-radius: 999px;
+  background: var(--color-border);
+  outline: none;
+}
+input[type="range"]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 16px;
+  height: 16px;
+  border-radius: 999px;
+  background: var(--color-fg);
+  border: 2px solid var(--color-accent);
+  cursor: pointer;
+  transition: transform 0.1s ease;
+}
+input[type="range"]::-webkit-slider-thumb:hover {
+  transform: scale(1.15);
+}
+input[type="range"]::-moz-range-thumb {
+  width: 14px;
+  height: 14px;
+  border-radius: 999px;
+  background: var(--color-fg);
+  border: 2px solid var(--color-accent);
+  cursor: pointer;
+}
+
+/* Shiki output: strip its background, we control the frame */
+.shiki,
+.shiki span {
+  background: transparent !important;
+}
+/* Font is controlled by the .glow-code container (see CodeBlock) so the user's
+   font choice + ligature setting cascade in. */
+.shiki {
+  font-family: inherit;
+}
+.glow-code {
+  font-family: var(--font-mono), ui-monospace, monospace;
+}
+.glow-code .shiki {
+  margin: 0;
+  overflow: visible;
+  white-space: pre;
+}
+.glow-code.wrap .shiki {
+  white-space: pre-wrap;
+  word-break: break-word;
+}
+.glow-code .shiki code {
+  display: grid;
+  counter-reset: step;
+}
+.glow-code.with-lines .line::before {
+  content: counter(step);
+  counter-increment: step;
+  display: inline-block;
+  width: 1.4rem;
+  margin-right: 1.3rem;
+  text-align: right;
+  color: inherit;
+  opacity: 0.35;
+}
+
+/* Per-line focus / highlight. Lines full-bleed to the code-body padding so the
+   accent stripe reaches the window edge. */
+.glow-code .line {
+  margin-inline: -22px;
+  padding-inline: 22px;
+  transition: background-color 0.12s ease, opacity 0.12s ease;
+}
+.glow-code.interactive .line {
+  cursor: pointer;
+}
+.glow-code.interactive .line:hover {
+  background-color: rgba(124, 92, 255, 0.1);
+}
+.glow-code .line.hl {
+  background-color: rgba(124, 92, 255, 0.16);
+  box-shadow: inset 3px 0 0 var(--color-accent);
+}
+.glow-code.dim .line:not(.hl):not(.diff-add):not(.diff-remove) {
+  opacity: 0.35;
+}
+
+/* Diff view — GitHub-style add / remove line tints. */
+.glow-code .line.diff-add {
+  background-color: rgba(46, 160, 67, 0.16);
+  box-shadow: inset 3px 0 0 #2ea043;
+}
+.glow-code .line.diff-remove {
+  background-color: rgba(248, 81, 73, 0.16);
+  box-shadow: inset 3px 0 0 #f85149;
+}
+
+@keyframes fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+.animate-fade-up {
+  animation: fadeUp 0.25s ease both;
+}

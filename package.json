@@ -1,0 +1,47 @@
+{
+  "name": "glowshot",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Turn screenshots and code into gorgeous, shareable images. Free, open-source, 100% client-side. An alternative to ray.so and carbon.",
+  "license": "MIT",
+  "homepage": "https://glowshot.app",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/your-username/glowshot.git"
+  },
+  "keywords": [
+    "screenshot",
+    "code-to-image",
+    "carbon-alternative",
+    "ray-so-alternative",
+    "screenshot-beautifier",
+    "shiki",
+    "nextjs",
+    "open-source"
+  ],
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "eslint"
+  },
+  "dependencies": {
+    "html-to-image": "^1.11.13",
+    "lucide-react": "^1.26.0",
+    "next": "16.2.11",
+    "react": "19.2.4",
+    "react-dom": "19.2.4",
+    "shiki": "^4.3.1",
+    "zustand": "^5.0.14"
+  },
+  "devDependencies": {
+    "@tailwindcss/postcss": "^4",
+    "@types/node": "^20",
+    "@types/react": "^19",
+    "@types/react-dom": "^19",
+    "eslint": "^9",
+    "eslint-config-next": "16.2.11",
+    "tailwindcss": "^4",
+    "typescript": "^5"
+  }
+}

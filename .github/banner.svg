@@ -1,0 +1,53 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="620" viewBox="0 0 1280 620" fill="none" font-family="ui-sans-serif, system-ui, sans-serif">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#a960ee"/>
+      <stop offset="0.5" stop-color="#7c5cff"/>
+      <stop offset="1" stop-color="#00c6ff"/>
+    </linearGradient>
+    <linearGradient id="logo" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#a960ee"/>
+      <stop offset="1" stop-color="#7c5cff"/>
+    </linearGradient>
+    <filter id="shadow" x="-30%" y="-30%" width="160%" height="180%">
+      <feDropShadow dx="0" dy="30" stdDeviation="35" flood-color="#000" flood-opacity="0.45"/>
+    </filter>
+    <clipPath id="round"><rect x="340" y="150" width="600" height="330" rx="14"/></clipPath>
+  </defs>
+
+  <rect width="1280" height="620" fill="#0a0a0f"/>
+  <rect x="40" y="40" width="1200" height="540" rx="28" fill="url(#bg)"/>
+
+  <!-- window -->
+  <g filter="url(#shadow)">
+    <rect x="340" y="150" width="600" height="330" rx="14" fill="#0d0d12"/>
+    <g clip-path="url(#round)">
+      <rect x="340" y="150" width="600" height="46" fill="#1e1e26"/>
+    </g>
+    <circle cx="366" cy="173" r="6" fill="#ff5f57"/>
+    <circle cx="388" cy="173" r="6" fill="#febc2e"/>
+    <circle cx="410" cy="173" r="6" fill="#28c840"/>
+    <text x="640" y="178" text-anchor="middle" font-size="13" fill="#8b8b96" font-family="ui-monospace, monospace">glowshot.ts</text>
+
+    <!-- code -->
+    <g font-family="ui-monospace, 'JetBrains Mono', monospace" font-size="14.5">
+      <text x="372" y="238" fill="#5c6370">1</text><text x="404" y="238" fill="#7f848e" font-style="italic">// Welcome to Glowshot ✨</text>
+      <text x="372" y="266" fill="#5c6370">2</text>
+      <text x="372" y="294" fill="#5c6370">3</text><text x="404" y="294" fill="#c678dd">async function</text><text x="560" y="294" fill="#61afef"> fetchStars</text><text x="668" y="294" fill="#abb2bf">(repo) {</text>
+      <text x="372" y="322" fill="#5c6370">4</text><text x="428" y="322" fill="#c678dd">const</text><text x="480" y="322" fill="#e06c75"> res</text><text x="512" y="322" fill="#abb2bf"> = </text><text x="540" y="322" fill="#c678dd">await</text><text x="592" y="322" fill="#61afef"> fetch</text><text x="640" y="322" fill="#98c379">(url)</text>
+      <text x="372" y="350" fill="#5c6370">5</text><text x="428" y="350" fill="#c678dd">return</text><text x="500" y="350" fill="#e06c75"> res</text><text x="532" y="350" fill="#abb2bf">.</text><text x="540" y="350" fill="#61afef">json</text><text x="576" y="350" fill="#abb2bf">()</text>
+      <text x="372" y="378" fill="#5c6370">6</text><text x="404" y="378" fill="#abb2bf">}</text>
+      <text x="372" y="406" fill="#5c6370">7</text>
+      <text x="372" y="434" fill="#5c6370">8</text><text x="404" y="434" fill="#e5c07b">console</text><text x="472" y="434" fill="#abb2bf">.</text><text x="480" y="434" fill="#61afef">log</text><text x="512" y="434" fill="#98c379">(`⭐ ${stars} and climbing`)</text>
+    </g>
+    <text x="912" y="466" text-anchor="end" font-size="11" font-weight="600" fill="rgba(255,255,255,0.85)">✦ Glowshot</text>
+  </g>
+
+  <!-- title -->
+  <g>
+    <rect x="90" y="86" width="34" height="34" rx="9" fill="url(#logo)"/>
+    <text x="107" y="110" text-anchor="middle" font-size="18" fill="#fff">✦</text>
+    <text x="136" y="112" font-size="26" font-weight="700" fill="#fff">Glowshot</text>
+  </g>
+  <text x="90" y="540" font-size="22" font-weight="600" fill="rgba(255,255,255,0.95)">Turn screenshots &amp; code into gorgeous, shareable images — free &amp; open source.</text>
+</svg>
