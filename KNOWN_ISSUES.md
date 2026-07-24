@@ -17,4 +17,4 @@ _None._
 ### Selection chrome baked into exports (fixed 2026-07-24)
 - **Was:** `AnnotationLayer` (incl. `SelectionHandles`) lives inside the export node (`#glow-canvas`), so exporting with an annotation selected could capture its selection handles/outline into the PNG/SVG/clipboard image.
 - **Fix:** selection-only chrome is tagged `glow-no-export`, and every capture path in `export.ts` passes html-to-image's `filter` option to drop those nodes at capture time. Selection is untouched (better UX than deselect-before-export), and the exclusion covers PNG/JPEG/SVG/copy/data-URI uniformly.
-- **Verification note:** confirmed by code trace + green build/types/lint/tests; not yet pixel-verified in a live browser export.
+- **Verification:** confirmed live in a headless Chromium (Playwright) — drew an arrow, selected it (two white handles visible on-screen), exported via ⌘S, and the captured PNG shows the arrow with **no** selection handles. A DOM probe also confirmed the `.glow-no-export` node was inside `#glow-canvas` (the real bug surface) before the filter dropped it. Plus green build/types/lint/tests.
